@@ -1,7 +1,7 @@
 // --- data & config ---
 const CASHIER = { name: 'RenzzMart', photo: 'https://i.pravatar.cc/100?img=3' };
 const PRODUCTS = [
-  {id:1,name:'Minyak Goreng 2L',price:32000,code:'8991110001123',img:'https://images.unsplash.com/photo-1586201375761-83865001e5b7?auto=format&fit=crop&w=400&q=60'},
+  {id:1,name:'Minyak Goreng 2L',price:32000,code:'8991110001123',img src=minyak.jpg},
   {id:2,name:'Beras 5kg',price:78000,code:'8991110002231',img:'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=400&q=60'},
   {id:3,name:'Roti Tawar 400g',price:15000,code:'8991110003349',img:'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=60'},
   {id:4,name:'Susu UHT 1L',price:22000,code:'8991110004456',img:'https://images.unsplash.com/photo-1582719478172-0b7b7a9b0c3d?auto=format&fit=crop&w=400&q=60'},
