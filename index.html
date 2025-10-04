@@ -3,15 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Supermarket - Scan QRIS & Kode Barang</title>
+  <title>RenzzMart — Supermarket Demo</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>Supermarket Demo — Scan QRIS & Kode Barang</h1>
+      <div class="brand">
+        <h1>RenzzMart — Supermarket Demo</h1>
+        <div class="cashier">
+          <img id="cashierPhoto" src="https://i.pravatar.cc/100?img=3" alt="Foto Kasir" />
+          <div class="cashier-info">
+            <div id="cashierName">RenzzMart</div>
+            <div class="muted small">Kasir</div>
+          </div>
+        </div>
+      </div>
       <div class="controls">
-        <button id="openScan" class="scan-btn">📷 Scan (QRIS / Kode Barang)</button>
+        <button id="openScan" class="scan-btn">📷 Scan (QRIS / Kode)</button>
         <button id="manualAdd" class="btn teal">Tambah Manual</button>
       </div>
     </header>
@@ -30,7 +39,7 @@
           <div id="total" class="total">Rp 0</div>
           <button id="checkout" class="btn">Checkout</button>
         </div>
-        <div class="muted small">Atau scan QRIS untuk membayar (gunakan tombol "Scan")</div>
+        <div class="muted small">Atau scan QRIS untuk membayar (pakai tombol "Scan")</div>
       </aside>
     </div>
 
@@ -53,6 +62,20 @@
           <input id="manualCode" placeholder="Masukkan kode barang / QR data" />
           <button id="manualAddBtn" class="btn">Tambahkan</button>
         </div>
+      </div>
+    </div>
+
+    <!-- Modal Receipt -->
+    <div class="modal" id="receiptModal">
+      <div class="panel receipt-panel" id="receiptPanel">
+        <div class="panel-head">
+          <strong>Struk Pembelian</strong>
+          <div>
+            <button id="printReceipt" class="btn">Cetak</button>
+            <button id="closeReceipt" class="scan-btn red">Tutup</button>
+          </div>
+        </div>
+        <div id="receiptContent" class="receipt-content"></div>
       </div>
     </div>
 
