@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Supermarket - Scan QRIS & Kode Barang</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Supermarket Demo — Scan QRIS & Kode Barang</h1>
+      <div class="controls">
+        <button id="openScan" class="scan-btn">📷 Scan (QRIS / Kode Barang)</button>
+        <button id="manualAdd" class="btn teal">Tambah Manual</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Produk</h2>
+        <div class="products" id="products"></div>
+      </section>
+
+      <aside class="card">
+        <h3>Keranjang</h3>
+        <div class="cart-list" id="cartList"></div>
+        <div class="total-box">
+          <div class="muted small">Total</div>
+          <div id="total" class="total">Rp 0</div>
+          <button id="checkout" class="btn">Checkout</button>
+        </div>
+        <div class="muted small">Atau scan QRIS untuk membayar (gunakan tombol "Scan")</div>
+      </aside>
+    </div>
+
+    <!-- Modal Scanner -->
+    <div class="modal" id="scannerModal">
+      <div class="panel">
+        <div class="panel-head">
+          <strong>Scanner</strong>
+          <button id="closeScan" class="scan-btn red">Tutup</button>
+        </div>
+        <video id="video" autoplay muted playsinline></video>
+        <div class="scan-hint">
+          <div class="muted">Tunjukkan QRIS atau kode batang ke kamera.</div>
+          <div class="scan-controls">
+            <button id="flip" class="btn dark">Ganti Kamera</button>
+            <button id="toggleTorch" class="btn dark">Senter</button>
+          </div>
+        </div>
+        <div class="manual-input">
+          <input id="manualCode" placeholder="Masukkan kode barang / QR data" />
+          <button id="manualAddBtn" class="btn">Tambahkan</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>Demo — Scanning pakai <strong>BarcodeDetector</strong> bila didukung browser.</footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
