@@ -1,18 +1,19 @@
 // --- data & config ---
 const CASHIER = { name: 'RenzzMart', photo: 'https://i.pravatar.cc/100?img=3' };
+// Daftar produk lengkap RenzzMart
 const PRODUCTS = [
-  {id:1,name:'Minyak Goreng 2L',price:32000,code:'8991110001123',img src=minyak.jpg},
-  {id:2,name:'Beras 5kg',price:78000,code:'8991110002231',img:'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=400&q=60'},
-  {id:3,name:'Roti Tawar 400g',price:15000,code:'8991110003349',img:'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=60'},
-  {id:4,name:'Susu UHT 1L',price:22000,code:'8991110004456',img:'https://images.unsplash.com/photo-1582719478172-0b7b7a9b0c3d?auto=format&fit=crop&w=400&q=60'},
-  {id:5,name:'Gula Pasir 1kg',price:17000,code:'8991110005567',img:'https://images.unsplash.com/photo-1615486367330-501c8e4b1b03?auto=format&fit=crop&w=400&q=60'},
-  {id:6,name:'Indomie Goreng',price:3500,code:'8991110006674',img:'https://images.unsplash.com/photo-1612874742237-652f7ac3a1c3?auto=format&fit=crop&w=400&q=60'},
-  {id:7,name:'Teh Botol Sosro',price:5000,code:'8991110007781',img:'https://images.unsplash.com/photo-1590080875831-f9b0d3a9b5e9?auto=format&fit=crop&w=400&q=60'},
-  {id:8,name:'Aqua 600ml',price:4000,code:'8991110008898',img:'https://images.unsplash.com/photo-1611689341873-6f3b74f5a2bb?auto=format&fit=crop&w=400&q=60'},
-  {id:9,name:'Snack Chitato',price:10500,code:'8991110009901',img:'https://images.unsplash.com/photo-1604908176997-9b79d2e58d9a?auto=format&fit=crop&w=400&q=60'},
-  {id:10,name:'Sabun Lifebuoy',price:7500,code:'8991110010011',img:'https://images.unsplash.com/photo-1599058917212-d750089bc07d?auto=format&fit=crop&w=400&q=60'},
-  {id:11,name:'Deterjen Rinso',price:22000,code:'8991110011128',img:'https://images.unsplash.com/photo-1615485737457-0f6fcebe7f19?auto=format&fit=crop&w=400&q=60'},
-  {id:12,name:'Pepsodent 190g',price:12000,code:'8991110012235',img:'https://images.unsplash.com/photo-1622207299605-17e7e0e54cf4?auto=format&fit=crop&w=400&q=60'}
+  { id: 1, name: 'Air Mineral Aqua 600ml', price: 5000, code: '8990010000011', img: 'aqua.jpg' },
+  { id: 2, name: 'Beras 5kg', price: 78000, code: '8990010000022', img: 'beras.jpg' },
+  { id: 3, name: 'Snack Chitato 68g', price: 12000, code: '8990010000033', img: 'chitato.jpg' },
+  { id: 4, name: 'Gula Pasir 1kg', price: 18000, code: '8990010000044', img: 'gula.jpg' },
+  { id: 5, name: 'Sabun Lifebuoy 100g', price: 7000, code: '8990010000055', img: 'lifebouy.jpg' },
+  { id: 6, name: 'Mie Instan Goreng', price: 3500, code: '8990010000066', img: 'mie.jpg' },
+  { id: 7, name: 'Minyak Goreng 2L', price: 32000, code: '8990010000077', img: 'minyak.jpg' },
+  { id: 8, name: 'Pasta Gigi Pepsodent 190g', price: 16000, code: '8990010000088', img: 'pepsodent.jpg' },
+  { id: 9, name: 'Deterjen Rinso 800g', price: 22000, code: '8990010000099', img: 'rinso.jpg' },
+  { id: 10, name: 'Roti Tawar', price: 15000, code: '8990010000100', img: 'roti.jpg' },
+  { id: 11, name: 'Susu UHT 1L', price: 22000, code: '8990010000111', img: 'susu.jpg' },
+  { id: 12, name: 'Teh Botol Sosro 350ml', price: 6000, code: '8990010000122', img: 'tehsosro.jpg' }
 ];
 
 // --- UI refs ---
