@@ -248,7 +248,7 @@ function updatePaymentDetails(){
   const sum = cart.reduce((s,i)=>s + i.qty*i.price, 0);
   if(selectedPayment === 'qris'){
     paymentDetails.innerHTML = `<div class="muted small">Scan QRIS (OVO/DANA/GoPay/ShopeePay)</div>
-      <div style="margin-top:8px"><img src="qris.png" alt="QRIS" style="width:180px" onerror="this.style.opacity='.4'"></div>
+      <div style="margin-top:8px"><img src="qris.jpg" alt="QRIS" style="width:180px" onerror="this.style.opacity='.4'"></div>
       <div style="margin-top:8px">Jumlah: <strong>${formatIDR(sum)}</strong></div>`;
   } else if(selectedPayment === 'bca' || selectedPayment === 'bri'){
     const info = selectedPayment === 'bca' ? {acc:'1234567890',name:'RenzzMart (BCA)'} : {acc:'0987654321',name:'RenzzMart (BRI)'};
