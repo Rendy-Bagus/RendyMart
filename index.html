@@ -2,85 +2,143 @@
 <html lang="id">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RenzzMart — Supermarket Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RenzzMart v2.0 — Supermarket Modern</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
+  <div class="app">
+    <header class="topbar">
       <div class="brand">
-        <h1>RenzzMart — Supermarket Demo</h1>
-        <div class="cashier">
-          <img id="cashierPhoto" src="https://i.pravatar.cc/100?img=3" alt="Foto Kasir" />
-          <div class="cashier-info">
-            <div id="cashierName">RenzzMart</div>
-            <div class="muted small">Kasir</div>
-          </div>
+        <img class="logo" src="logo.png" alt="RenzzMart logo" onerror="this.style.display='none'">
+        <div>
+          <h1>RenzzMart</h1>
+          <div class="muted small">Supermarket Demo</div>
         </div>
       </div>
-      <div class="controls">
-        <button id="openScan" class="scan-btn">📷 Scan (QRIS / Kode)</button>
-        <button id="manualAdd" class="btn teal">Tambah Manual</button>
+
+      <div class="top-controls">
+        <div class="search-wrap">
+          <input id="searchInput" placeholder="Cari produk atau kode..." />
+          <select id="categoryFilter">
+            <option value="">Semua Kategori</option>
+            <option value="Minuman">Minuman</option>
+            <option value="Sembako">Sembako</option>
+            <option value="Makanan">Makanan</option>
+            <option value="Kebersihan">Kebersihan</option>
+            <option value="Camilan">Camilan</option>
+            <option value="Roti">Roti</option>
+          </select>
+        </div>
+
+        <div class="right-controls">
+          <button id="themeToggle" class="icon-btn" title="Toggle dark mode">🌗</button>
+          <button id="openScan" class="btn">📷 Scan</button>
+          <button id="manualAdd" class="btn teal">Tambah</button>
+        </div>
       </div>
     </header>
 
-    <div class="grid">
-      <section class="card">
-        <h2>Produk</h2>
-        <div class="products" id="products"></div>
+    <main class="main">
+      <section class="catalog card">
+        <h2>Etalase Produk</h2>
+        <div id="products" class="products"></div>
       </section>
 
-      <aside class="card">
-        <h3>Keranjang</h3>
-        <div class="cart-list" id="cartList"></div>
-        <div class="total-box">
-          <div class="muted small">Total</div>
-          <div id="total" class="total">Rp 0</div>
-          <button id="checkout" class="btn">Checkout</button>
-        </div>
-        <div class="muted small">Atau scan QRIS untuk membayar (pakai tombol "Scan")</div>
-      </aside>
-    </div>
-
-    <!-- Modal Scanner -->
-    <div class="modal" id="scannerModal">
-      <div class="panel">
-        <div class="panel-head">
-          <strong>Scanner</strong>
-          <button id="closeScan" class="scan-btn red">Tutup</button>
-        </div>
-        <video id="video" autoplay muted playsinline></video>
-        <div class="scan-hint">
-          <div class="muted">Tunjukkan QRIS atau kode batang ke kamera.</div>
-          <div class="scan-controls">
-            <button id="flip" class="btn dark">Ganti Kamera</button>
-            <button id="toggleTorch" class="btn dark">Senter</button>
-          </div>
-        </div>
-        <div class="manual-input">
-          <input id="manualCode" placeholder="Masukkan kode barang / QR data" />
-          <button id="manualAddBtn" class="btn">Tambahkan</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal Receipt -->
-    <div class="modal" id="receiptModal">
-      <div class="panel receipt-panel" id="receiptPanel">
-        <div class="panel-head">
-          <strong>Struk Pembelian</strong>
+      <aside class="sidebar card">
+        <div class="cashier">
+          <img id="cashierPhoto" src="https://i.pravatar.cc/100?img=3" alt="Kasir">
           <div>
-            <button id="printReceipt" class="btn">Cetak</button>
-            <button id="closeReceipt" class="scan-btn red">Tutup</button>
+            <div id="cashierName"><strong>RenzzMart</strong></div>
+            <div class="muted small">Kasir</div>
           </div>
         </div>
-        <div id="receiptContent" class="receipt-content"></div>
+
+        <h3>Keranjang</h3>
+        <div id="cartList" class="cart-list"></div>
+
+        <div class="checkout-box">
+          <div class="muted small">Subtotal</div>
+          <div id="total" class="total">Rp 0</div>
+
+          <div class="checkout-actions">
+            <button id="checkout" class="btn">Checkout</button>
+            <button id="clearCart" class="btn red">Kosongkan</button>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer muted">RenzzMart v2.0 — Demo. Scan pakai BarcodeDetector bila didukung browser.</footer>
+  </div>
+
+  <!-- Scanner Modal -->
+  <div class="modal" id="scannerModal">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <strong>Scanner</strong>
+        <div>
+          <button id="closeScan" class="icon-btn">✖</button>
+        </div>
+      </div>
+      <video id="video" autoplay muted playsinline></video>
+      <div class="scan-controls">
+        <div class="muted small">Tunjukkan QRIS atau barcode produk</div>
+        <div>
+          <button id="flip" class="btn dark">Ganti Kamera</button>
+          <button id="toggleTorch" class="btn dark">Senter</button>
+        </div>
+      </div>
+
+      <div class="manual-input">
+        <input id="manualCode" placeholder="Masukkan kode / data QR" />
+        <button id="manualAddBtn" class="btn">Tambahkan</button>
       </div>
     </div>
-
-    <footer>Demo — Scanning pakai <strong>BarcodeDetector</strong> bila didukung browser.</footer>
   </div>
+
+  <!-- Payment Modal -->
+  <div class="modal" id="paymentModal">
+    <div class="modal-panel small-panel">
+      <div class="modal-head">
+        <strong>Pembayaran</strong>
+        <div><button id="closePayment" class="icon-btn">✖</button></div>
+      </div>
+
+      <label class="muted small">Metode</label>
+      <select id="paymentMethod">
+        <option value="qris">QRIS (E-Wallet)</option>
+        <option value="bca">Transfer BCA</option>
+        <option value="bri">Transfer BRI</option>
+        <option value="cash">Tunai</option>
+      </select>
+
+      <div id="paymentDetails" class="payment-details"></div>
+
+      <div class="pay-actions">
+        <button id="confirmPayment" class="btn">Konfirmasi</button>
+        <button id="cancelPayment" class="btn dark">Batal</button>
+      </div>
+
+      <div class="summary" id="summaryBox"></div>
+    </div>
+  </div>
+
+  <!-- Receipt Modal -->
+  <div class="modal" id="receiptModal">
+    <div class="modal-panel receipt-panel">
+      <div class="modal-head">
+        <strong>Struk (Invoice)</strong>
+        <div>
+          <button id="printReceipt" class="btn">Cetak</button>
+          <button id="closeReceipt" class="icon-btn">✖</button>
+        </div>
+      </div>
+      <div id="receiptContent" class="receipt-content"></div>
+    </div>
+  </div>
+
+  <audio id="beepAudio" src=""></audio>
 
   <script src="script.js"></script>
 </body>
