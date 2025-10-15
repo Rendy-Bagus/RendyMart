@@ -1,19 +1,16 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>RenzzMart — Toko</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="topbar">
     <div class="left">
       <img src="logo.png" alt="logo" class="logo" onerror="this.style.display='none'">
-      <div class="brand-text">
-        <h2>RenzzMart</h2>
-        <div class="muted small">Supermarket Demo</div>
-      </div>
+      <div class="brand-text"><h2>RenzzMart</h2><div class="muted small">Supermarket Demo</div></div>
     </div>
 
     <div class="center-search">
@@ -23,10 +20,8 @@
 
     <div class="right">
       <button id="themeToggle" class="icon-btn" title="Toggle theme">🌗</button>
-      <div class="cart-icon" id="cartBtn" title="Keranjang">🛒 <span id="cartCount">0</span></div>
-      <div class="account" id="accountBtn" title="Akun">
-        <img id="acctAvatar" src="https://i.pravatar.cc/64?u=renzz" alt="akun">
-      </div>
+      <div id="cartBtn" class="cart-icon" title="Keranjang">🛒 <span id="cartCount">0</span></div>
+      <a id="acctLink" class="account" href="profile.html" title="Akun"><img id="acctAvatar" src="https://i.pravatar.cc/64" alt="akun"></a>
     </div>
   </header>
 
@@ -57,20 +52,9 @@
         </div>
       </div>
 
-      <div class="muted small" style="margin-top:10px">QRIS: letakkan file <code>qris.jpg</code> di folder yang sama untuk ditampilkan saat bayar.</div>
+      <div class="muted small" style="margin-top:10px">Letakkan file <code>qris.jpg</code> di folder yang sama untuk tampilan QRIS saat bayar.</div>
     </aside>
   </main>
-
-  <!-- Account dropdown -->
-  <div id="accountMenu" class="menu hidden card">
-    <div id="acctInfo">
-      <strong id="menuName">Nama</strong><br/><span id="menuEmail" class="muted small"></span>
-    </div>
-    <hr/>
-    <button id="btnProfile" class="btn teal">Profil</button>
-    <button id="btnHistory" class="btn">Riwayat Transaksi</button>
-    <button id="btnLogout" class="btn red">Logout</button>
-  </div>
 
   <!-- Payment Modal -->
   <div id="paymentModal" class="modal">
@@ -84,7 +68,7 @@
     </div>
   </div>
 
-  <!-- Receipt modal -->
+  <!-- Receipt Modal -->
   <div id="receiptModal" class="modal">
     <div class="modal-panel receipt-panel">
       <div class="modal-head"><strong>Struk Pembelian</strong><div><button id="printReceipt" class="btn">Cetak</button> <button id="closeReceipt" class="icon-btn">✖</button></div></div>
@@ -92,18 +76,7 @@
     </div>
   </div>
 
-  <!-- History modal (admin only) -->
-  <div id="historyModal" class="modal">
-    <div class="modal-panel receipt-panel">
-      <div class="modal-head"><strong>Riwayat Transaksi</strong><div><button id="closeHistory" class="icon-btn">✖</button></div></div>
-      <div id="historyList" style="max-height:400px;overflow:auto"></div>
-    </div>
-  </div>
-
   <script src="script.js"></script>
-  <script>
-    // run store init
-    window.RenzzApp && window.RenzzApp.initStore && window.RenzzApp.initStore();
-  </script>
+  <script>window.RenzzApp && window.RenzzApp.initStore && window.RenzzApp.initStore();</script>
 </body>
 </html>
