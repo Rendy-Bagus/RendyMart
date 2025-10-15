@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RenzzMart — Riwayat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar"><div class="left"><a href="store.html">← Kembali</a></div></header>
+  <main style="max-width:1100px;margin:18px auto;padding:12px">
+    <div id="historyWrap" class="card"><h2>Riwayat Transaksi</h2><div id="historyList" class="muted small">Memuat...</div></div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    (async ()=>{
+      await window.RenzzAuth.init();
+      const u = window.RenzzAuth.currentUser();
+      if(!u || !u.isAdmin) { alert('Hanya admin.'); location.href='store.html'; return; }
+      const hist = window.RenzzApp.getHistory();
+      const wrap = document.getElementById('historyList');
+      if(!hist.length) wrap.textContent = 'Belum ada transaksi.';
+      else {
+        wrap.innerHTML = hist.map(tx=>{
+          return `<div style="padding:8px;border-bottom:1px solid #eef6fc">
+            <strong>${tx.id}</strong> — ${new Date(tx.time).toLocaleString()} — ${tx.user.name} — ${formatIDR(tx.total)}<br/><span class="muted small">${tx.method}</span>
+            <div style="margin-top:6px">${tx.items.map(it=>`<div>${it.name} x${it.qty} = ${formatIDR(it.qty*it.price)}</div>`).join('')}</div>
+          </div>`;
+        }).join('');
+      }
+    })();
+  </script>
+</body>
+</html>
