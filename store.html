@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>RenzzMart — Toko</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="left">
+      <img src="logo.png" alt="logo" class="logo" onerror="this.style.display='none'">
+      <div class="brand-text">
+        <h2>RenzzMart</h2>
+        <div class="muted small">Supermarket Demo</div>
+      </div>
+    </div>
+
+    <div class="center-search">
+      <input id="searchInput" placeholder="Cari produk atau kategori..." />
+      <select id="categoryFilter"><option value="">Semua Kategori</option><option>Minuman</option><option>Sembako</option><option>Makanan</option><option>Kebersihan</option><option>Camilan</option><option>Roti</option></select>
+    </div>
+
+    <div class="right">
+      <button id="themeToggle" class="icon-btn" title="Toggle theme">🌗</button>
+      <div class="cart-icon" id="cartBtn" title="Keranjang">🛒 <span id="cartCount">0</span></div>
+      <div class="account" id="accountBtn" title="Akun">
+        <img id="acctAvatar" src="https://i.pravatar.cc/64?u=renzz" alt="akun">
+      </div>
+    </div>
+  </header>
+
+  <main class="main-grid">
+    <section class="catalog card">
+      <h3>Etalase</h3>
+      <div id="products" class="products"></div>
+    </section>
+
+    <aside class="sidebar card">
+      <div class="cashier">
+        <img id="cashierPhoto" src="https://i.pravatar.cc/100?img=3" alt="kasir">
+        <div>
+          <div id="userName"><strong>Guest</strong></div>
+          <div id="userEmail" class="muted small"></div>
+        </div>
+      </div>
+
+      <h4>Keranjang</h4>
+      <div id="cartList" class="cart-list"></div>
+
+      <div class="checkout-box">
+        <div class="muted small">Subtotal</div>
+        <div id="total" class="total">Rp 0</div>
+        <div class="checkout-actions">
+          <button id="checkout" class="btn">Checkout</button>
+          <button id="clearCart" class="btn red">Kosongkan</button>
+        </div>
+      </div>
+
+      <div class="muted small" style="margin-top:10px">QRIS: letakkan file <code>qris.jpg</code> di folder yang sama untuk ditampilkan saat bayar.</div>
+    </aside>
+  </main>
+
+  <!-- Account dropdown -->
+  <div id="accountMenu" class="menu hidden card">
+    <div id="acctInfo">
+      <strong id="menuName">Nama</strong><br/><span id="menuEmail" class="muted small"></span>
+    </div>
+    <hr/>
+    <button id="btnProfile" class="btn teal">Profil</button>
+    <button id="btnHistory" class="btn">Riwayat Transaksi</button>
+    <button id="btnLogout" class="btn red">Logout</button>
+  </div>
+
+  <!-- Payment Modal -->
+  <div id="paymentModal" class="modal">
+    <div class="modal-panel">
+      <div class="modal-head"><strong>Pembayaran</strong><div><button id="closePayment" class="icon-btn">✖</button></div></div>
+      <label>Metode</label>
+      <select id="paymentMethod"><option value="qris">QRIS</option><option value="bca">Transfer BCA</option><option value="bri">Transfer BRI</option><option value="cash">Tunai</option></select>
+      <div id="paymentDetails" class="payment-details"></div>
+      <div style="margin-top:12px"><button id="confirmPayment" class="btn">Konfirmasi & Bayar</button> <button id="cancelPayment" class="btn dark">Batal</button></div>
+      <div id="summaryBox" class="summary"></div>
+    </div>
+  </div>
+
+  <!-- Receipt modal -->
+  <div id="receiptModal" class="modal">
+    <div class="modal-panel receipt-panel">
+      <div class="modal-head"><strong>Struk Pembelian</strong><div><button id="printReceipt" class="btn">Cetak</button> <button id="closeReceipt" class="icon-btn">✖</button></div></div>
+      <pre id="receiptContent" class="receipt-content"></pre>
+    </div>
+  </div>
+
+  <!-- History modal (admin only) -->
+  <div id="historyModal" class="modal">
+    <div class="modal-panel receipt-panel">
+      <div class="modal-head"><strong>Riwayat Transaksi</strong><div><button id="closeHistory" class="icon-btn">✖</button></div></div>
+      <div id="historyList" style="max-height:400px;overflow:auto"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // run store init
+    window.RenzzApp && window.RenzzApp.initStore && window.RenzzApp.initStore();
+  </script>
+</body>
+</html>
