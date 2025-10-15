@@ -1,1 +1,70 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RenzzMart — Profil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="left"><a href="store.html">← Kembali</a></div>
+    <div></div>
+    <div></div>
+  </header>
+
+  <main style="max-width:700px;margin:18px auto;padding:12px">
+    <div class="card">
+      <h2>Profil Akun</h2>
+      <div style="display:flex;gap:12px;align-items:center">
+        <img id="pfAvatar" src="https://i.pravatar.cc/100" alt="avatar" style="width:80px;height:80px;border-radius:8px">
+        <div>
+          <div id="pfName" style="font-weight:700">Nama</div>
+          <div id="pfEmail" class="muted small">email</div>
+        </div>
+      </div>
+
+      <hr style="margin:12px 0">
+      <h3>Ganti Password</h3>
+      <input id="oldPass" type="password" placeholder="Password lama" />
+      <input id="newPass" type="password" placeholder="Password baru (min 6)" />
+      <input id="confirmNew" type="password" placeholder="Konfirmasi password baru" />
+      <div style="margin-top:8px">
+        <button id="btnChangePass" class="btn">Simpan Perubahan</button>
+      </div>
+
+      <div style="margin-top:18px">
+        <button id="btnLogout" class="btn red">Logout</button>
+        <button id="btnHistory" class="btn" style="margin-left:8px;display:none">Riwayat Transaksi (Admin)</button>
+      </div>
+      <div id="pfMsg" class="muted small" style="margin-top:12px"></div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    (async ()=>{
+      await window.RenzzAuth.init();
+      const u = window.RenzzAuth.currentUser();
+      if(!u) { location.href = 'index.html'; return; }
+      document.getElementById('pfName').textContent = u.name;
+      document.getElementById('pfEmail').textContent = u.email;
+      document.getElementById('pfAvatar').src = u.avatar || `https://i.pravatar.cc/100?u=${encodeURIComponent(u.email)}`;
+      if(u.isAdmin) document.getElementById('btnHistory').style.display = 'inline-block';
+
+      document.getElementById('btnLogout').addEventListener('click', ()=> { window.RenzzAuth.logout(); location.href='index.html'; });
+      document.getElementById('btnHistory').addEventListener('click', ()=> { location.href='history.html'; });
+
+      document.getElementById('btnChangePass').addEventListener('click', async ()=>{
+        const oldP = document.getElementById('oldPass').value;
+        const newP = document.getElementById('newPass').value;
+        const conf = document.getElementById('confirmNew').value;
+        document.getElementById('pfMsg').textContent = 'Memproses...';
+        const r = await window.RenzzAuth.changePassword(u.email, oldP, newP, conf);
+        document.getElementById('pfMsg').textContent = r.success ? 'Password berhasil diubah.' : ('Gagal: ' + r.error);
+      });
+    })();
+  </script>
+</body>
+</html>
 
