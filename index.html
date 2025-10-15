@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RenzzMart — Login / Daftar</title>
-  <link rel="stylesheet" href="style.css">
+  <title>RenzzMart — Masuk / Daftar</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="auth-page">
@@ -12,7 +12,7 @@
       <div class="brand">
         <img src="logo.png" alt="logo" class="logo" onerror="this.style.display='none'">
         <h1>RenzzMart</h1>
-        <p class="muted">Masuk atau buat akun untuk mulai berbelanja</p>
+        <p class="muted">Daftar atau masuk untuk mulai berbelanja</p>
       </div>
 
       <div class="tabs">
@@ -21,63 +21,61 @@
       </div>
 
       <div id="loginBox" class="form">
-        <input id="loginEmail" placeholder="Email atau Username" />
-        <input id="loginPassword" type="password" placeholder="Password" />
-        <button id="btnLogin" class="btn">Login</button>
-        <div class="muted small" style="margin-top:8px">Atau langsung coba sebagai <button id="demoBtn" class="link">guest</button></div>
+        <input id="loginId" placeholder="Email atau Username" />
+        <input id="loginPass" type="password" placeholder="Password" />
+        <button id="btnLogin" class="btn">Masuk</button>
+        <div class="muted small" style="margin-top:10px">Atau coba sebagai <button id="guestBtn" class="link">Guest</button></div>
       </div>
 
       <div id="registerBox" class="form hidden">
-        <input id="regName" placeholder="Nama (akan tampil di akun)" />
+        <input id="regName" placeholder="Nama tampil" />
+        <input id="regUser" placeholder="Username" />
         <input id="regEmail" placeholder="Email" />
-        <input id="regPassword" type="password" placeholder="Password (min 6)" />
+        <input id="regPass" type="password" placeholder="Password (min 6)" />
         <input id="regConfirm" type="password" placeholder="Konfirmasi password" />
-        <label class="small muted"><input id="isAdmin" type="checkbox"> Jadikan akun ini admin (hanya untuk demo)</label>
+        <label class="small muted"><input id="isAdmin" type="checkbox"> Buat admin (demo)</label>
         <button id="btnRegister" class="btn teal">Daftar</button>
       </div>
 
-      <div id="msg" class="muted small" style="margin-top:10px"></div>
+      <div id="msg" class="muted small" style="margin-top:12px"></div>
     </div>
 
-    <footer class="auth-footer muted">RenzzMart demo • Semua data tersimpan di browser (localStorage).</footer>
+    <footer class="auth-footer muted">RenzzMart v4.0 — Demo. Data tersimpan di browser (localStorage).</footer>
   </main>
 
   <script src="script.js"></script>
   <script>
-    // Auth UI wiring (uses functions inside script.js)
-    (function(){
+    // Wire UI (uses RenzzAuth from script.js)
+    (async ()=>{
+      await window.RenzzAuth.init();
+
       const $ = id => document.getElementById(id);
       const tabLogin = $('tabLogin'), tabRegister = $('tabRegister');
       const loginBox = $('loginBox'), registerBox = $('registerBox');
       const msg = $('msg');
 
-      tabLogin.addEventListener('click', ()=>{ tabLogin.classList.add('active'); tabRegister.classList.remove('active'); loginBox.classList.remove('hidden'); registerBox.classList.add('hidden'); msg.textContent='';});
-      tabRegister.addEventListener('click', ()=>{ tabRegister.classList.add('active'); tabLogin.classList.remove('active'); registerBox.classList.remove('hidden'); loginBox.classList.add('hidden'); msg.textContent='';});
+      tabLogin.addEventListener('click', ()=>{ tabLogin.classList.add('active'); tabRegister.classList.remove('active'); loginBox.classList.remove('hidden'); registerBox.classList.add('hidden'); msg.textContent=''; });
+      tabRegister.addEventListener('click', ()=>{ tabRegister.classList.add('active'); tabLogin.classList.remove('active'); registerBox.classList.remove('hidden'); loginBox.classList.add('hidden'); msg.textContent=''; });
 
       $('btnLogin').addEventListener('click', async ()=>{
-        const id = $('loginEmail').value.trim();
-        const pw = $('loginPassword').value;
         msg.textContent = 'Memproses...';
-        const ok = await window.RenzzAuth.login(id,pw);
-        if(ok.success){ msg.textContent = 'Login berhasil. Mengarahkan ke toko...'; setTimeout(()=> location.href='store.html',800); }
-        else msg.textContent = 'Login gagal: ' + ok.error;
+        const id = $('loginId').value.trim(), pw = $('loginPass').value;
+        const res = await window.RenzzAuth.login(id, pw);
+        if(res.success){ msg.textContent = 'Login berhasil. Mengarahkan...'; setTimeout(()=> location.href='store.html',500); }
+        else msg.textContent = 'Login gagal: ' + res.error;
       });
 
       $('btnRegister').addEventListener('click', async ()=>{
-        const name = $('regName').value.trim();
-        const email = $('regEmail').value.trim();
-        const pw = $('regPassword').value;
-        const conf = $('regConfirm').value;
-        const admin = $('isAdmin').checked;
-        msg.textContent = 'Memproses pendaftaran...';
-        const res = await window.RenzzAuth.register({name,email,password:pw,confirm:conf,isAdmin:admin});
-        if(res.success){ msg.textContent = 'Akun dibuat. Silakan login.'; tabLogin.click(); } else msg.textContent = 'Daftar gagal: ' + res.error;
+        msg.textContent = 'Mendaftar...';
+        const payload = { name: $('regName').value.trim(), username: $('regUser').value.trim(), email: $('regEmail').value.trim(), password: $('regPass').value, confirm: $('regConfirm').value, isAdmin: $('isAdmin').checked };
+        const r = await window.RenzzAuth.register(payload);
+        if(r.success){ msg.textContent = 'Akun dibuat. Silakan login.'; tabLogin.click(); }
+        else msg.textContent = 'Daftar gagal: ' + r.error;
       });
 
-      $('demoBtn').addEventListener('click', async ()=>{
-        // create demo guest user if not exists and login
-        const demo = await window.RenzzAuth.ensureGuest();
-        if(demo) location.href='store.html';
+      $('guestBtn').addEventListener('click', async ()=>{
+        await window.RenzzAuth.ensureGuest();
+        location.href = 'store.html';
       });
     })();
   </script>
